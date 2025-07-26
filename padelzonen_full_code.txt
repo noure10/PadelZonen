@@ -1,0 +1,1212 @@
+
+
+
+/* --- padelzonen/product.html --- */
+
+<!DOCTYPE html>
+<!-- Default language is English; language will be set dynamically via lang.js -->
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title data-i18n="product-title">Padel Racket – PadelZonen</title>
+  <link id="bootstrap-css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+  <link href="css/style.css" rel="stylesheet"/>
+</head>
+<body onload="loadCartCount()">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="index.html">
+        <img src="assets/logo.png" alt="Logo" width="40" height="40" class="me-2"/>
+        <span class="fw-bold">PadelZonen</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="index.html"><span data-i18n="nav-home">Home</span></a></li>
+          <li class="nav-item"><a class="nav-link active" aria-current="page" href="product.html"><span data-i18n="nav-product">Product</span></a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html"><span data-i18n="nav-about">About</span></a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html"><span data-i18n="nav-contact">Contact</span></a></li>
+        </ul>
+        <!-- Language selector -->
+        <select id="language-select" class="form-select form-select-sm me-2" onchange="changeLang(this.value)">
+          <option value="en">English</option>
+          <option value="ar">العربية</option>
+          <option value="sv">Svenska</option>
+          <option value="de">Deutsch</option>
+          <option value="fr">Français</option>
+          <option value="es">Español</option>
+          <option value="it">Italiano</option>
+          <option value="nl">Nederlands</option>
+          <option value="pt">Português</option>
+          <option value="da">Dansk</option>
+          <option value="no">Norsk</option>
+          <option value="fi">Suomi</option>
+          <option value="pl">Polski</option>
+        </select>
+        <button type="button" class="btn btn-outline-light position-relative" onclick="openCart()" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas">
+          <i class="fa fa-shopping-cart"></i>
+          <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Offcanvas cart sidebar -->
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="cartOffcanvas" aria-labelledby="cartOffcanvasLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="cartOffcanvasLabel" data-i18n="cart-title">Cart</h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div id="cart-items"></div>
+      <hr/>
+      <p><strong data-i18n="cart-total-label">Total:</strong> <span id="cart-total">0</span> SEK</p>
+      <a href="product.html" class="btn btn-primary w-100" data-i18n="hero-cta">Shop Now</a>
+    </div>
+  </div>
+
+  <!-- Toast notification for added to cart -->
+  <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1080">
+    <div id="cartToast" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="d-flex">
+        <div class="toast-body" data-i18n="cart-added">Product added to cart!</div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+    </div>
+  </div>
+
+  <main class="container" style="margin-top: 90px;">
+    <div class="row g-4">
+      <div class="col-md-6">
+        <img src="assets/product.png" alt="Padel Racket" class="img-fluid rounded shadow"/>
+      </div>
+      <div class="col-md-6">
+        <h2 class="fw-bold mb-3" data-i18n="product-heading">Carbon Fiber Padel Racket</h2>
+        <p data-i18n="product-desc">This racket is designed to give you the best performance on the court, crafted from high‑quality carbon fiber and an EVA foam core to ensure excellent control and shock absorption. The balanced weight and round shape make it suitable for both beginners and professionals.</p>
+        <ul class="list-unstyled mb-3">
+          <li><i class="fa fa-check text-success ms-2"></i> <span data-i18n="product-spec1">Approximate weight of 370 g</span></li>
+          <li><i class="fa fa-check text-success ms-2"></i> <span data-i18n="product-spec2">12K carbon surface balancing power and control</span></li>
+          <li><i class="fa fa-check text-success ms-2"></i> <span data-i18n="product-spec3">Comfortable, anti‑slip handle</span></li>
+          <li><i class="fa fa-check text-success ms-2"></i> <span data-i18n="product-spec4">Suitable for all ages and skill levels</span></li>
+        </ul>
+        <h3 class="text-primary fw-bold" data-i18n="product-price">Price: 799.99 SEK</h3>
+        <button class="btn btn-primary btn-lg mt-3" onclick="addToCart()" data-i18n="product-button">Add to Cart</button>
+      </div>
+    </div>
+  </main>
+
+  <section class="container py-5">
+    <h3 class="fw-bold mb-3" data-i18n="product-additional-heading">Additional Details</h3>
+    <p data-i18n="product-additional-1">The racket features a triple composition – a body made from carbon and fiberglass with an EVA core, ensuring long‑lasting use and shock resistance. The round head shape provides a large sweet spot, while the handle wrapped with an anti‑slip grip offers comfortable hold during intense play.</p>
+    <p data-i18n="product-additional-2">You can order large quantities for additional discounts. Please contact us via the <a href="contact.html" data-i18n="nav-contact">Contact</a> page for more information.</p>
+  </section>
+
+  <!-- Payment instructions for Swish -->
+  <section class="container py-5">
+    <h3 class="fw-bold mb-3" data-i18n="payment-heading">Pay with Swish</h3>
+    <p data-i18n="payment-instructions">Pay via Swish: open your Swish app and send 799.99 SEK to the number: 1234567890. Please mention your order number in the message. After payment, contact us via the <a href="contact.html" data-i18n="nav-contact">Contact</a> page with proof of payment.</p>
+    <a href="#" class="btn btn-success mt-2" onclick="openSwish()" data-i18n="payment-button">Open Swish App</a>
+  </section>
+
+  <footer class="bg-dark text-white text-center py-4">
+    <div class="container">
+      <p class="mb-1" data-i18n="footer-rights">&copy; 2025 PadelZonen. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/script.js"></script>
+  <script src="js/lang.js"></script>
+</body>
+</html>
+
+
+/* --- padelzonen/index.html --- */
+
+<!DOCTYPE html>
+<!-- Default language is English; language and direction will be
+     dynamically updated based on user preference via lang.js -->
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PadelZonen</title>
+  <!-- Bootstrap CSS via CDN for rapid layout; id for dynamic switching -->
+  <link id="bootstrap-css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <!-- Font Awesome icons for visual cues -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+  <!-- Custom styles -->
+  <link href="css/style.css" rel="stylesheet"/>
+</head>
+<body onload="loadCartCount()">
+  <!-- Navigation bar with language selector -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="index.html">
+        <img src="assets/logo.png" alt="PadelZonen Logo" width="40" height="40" class="me-2"/>
+        <span class="fw-bold">PadelZonen</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link active" aria-current="page" href="index.html"><span data-i18n="nav-home">Home</span></a></li>
+          <li class="nav-item"><a class="nav-link" href="product.html"><span data-i18n="nav-product">Product</span></a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html"><span data-i18n="nav-about">About</span></a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html"><span data-i18n="nav-contact">Contact</span></a></li>
+        </ul>
+        <!-- Language selector -->
+        <select id="language-select" class="form-select form-select-sm me-2" onchange="changeLang(this.value)">
+          <option value="en">English</option>
+          <option value="ar">العربية</option>
+          <option value="sv">Svenska</option>
+          <option value="de">Deutsch</option>
+          <option value="fr">Français</option>
+          <option value="es">Español</option>
+          <option value="it">Italiano</option>
+          <option value="nl">Nederlands</option>
+          <option value="pt">Português</option>
+          <option value="da">Dansk</option>
+          <option value="no">Norsk</option>
+          <option value="fi">Suomi</option>
+          <option value="pl">Polski</option>
+        </select>
+        <!-- Cart button opens offcanvas -->
+        <button type="button" class="btn btn-outline-light position-relative" onclick="openCart()" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas">
+          <i class="fa fa-shopping-cart"></i>
+          <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Offcanvas cart sidebar -->
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="cartOffcanvas" aria-labelledby="cartOffcanvasLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="cartOffcanvasLabel">Cart</h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div id="cart-items"></div>
+      <hr/>
+      <p><strong data-i18n="cart-total-label">Total:</strong> <span id="cart-total">0</span> SEK</p>
+      <a href="product.html" class="btn btn-primary w-100" data-i18n="hero-cta">Shop Now</a>
+    </div>
+  </div>
+
+  <!-- Toast notification for added to cart -->
+  <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1080">
+    <div id="cartToast" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="d-flex">
+        <div class="toast-body" data-i18n="cart-added">Product added to cart!</div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero section -->
+  <header class="hero d-flex align-items-center text-center text-white">
+    <div class="container">
+      <h1 class="display-4 fw-bold mb-3" data-i18n="hero-heading">Get ready for the game!</h1>
+      <p class="lead mb-4" data-i18n="hero-subheading">High‑quality padel rackets made from carbon fiber ensuring professional performance for players of all ages.</p>
+      <a href="product.html" class="btn btn-primary btn-lg" data-i18n="hero-cta">Shop Now</a>
+    </div>
+  </header>
+
+  <!-- Features section -->
+  <section class="py-5">
+    <div class="container">
+      <div class="row text-center g-4">
+        <div class="col-md-4">
+          <div class="p-4 shadow-sm h-100 rounded">
+            <i class="fa fa-star fa-3x mb-3 text-primary"></i>
+            <h4 class="mb-3" data-i18n="feature-quality-title">Premium Quality</h4>
+            <p data-i18n="feature-quality-desc">We use the latest carbon materials and EVA foam to ensure the best balance between power and precision.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="p-4 shadow-sm h-100 rounded">
+            <i class="fa fa-users fa-3x mb-3 text-primary"></i>
+            <h4 class="mb-3" data-i18n="feature-age-title">For All Ages</h4>
+            <p data-i18n="feature-age-desc">Ergonomic design suitable for both young and adult players, with ideal weight for beginners and professionals.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="p-4 shadow-sm h-100 rounded">
+            <i class="fa fa-shipping-fast fa-3x mb-3 text-primary"></i>
+            <h4 class="mb-3" data-i18n="feature-delivery-title">Fast Delivery</h4>
+            <p data-i18n="feature-delivery-desc">We offer free delivery within Sweden with safe and easy payment options.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About preview -->
+  <section class="bg-light py-5">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <h2 class="fw-bold mb-3" data-i18n="preview-heading">Why Padel?</h2>
+          <p data-i18n="preview-desc">Padel is one of the fastest growing sports worldwide, and its popularity is rapidly increasing in Sweden. With over half a million players and 800 courts in the country, padel has become a favourite sport for many families and friends. At PadelZonen we strive to provide the best equipment so everyone can have a fun and safe playing experience.</p>
+          <a href="about.html" class="btn btn-outline-primary mt-2" data-i18n="preview-btn">Read More</a>
+        </div>
+        <div class="col-md-6">
+          <img src="assets/product.png" alt="Padel Racket" class="img-fluid rounded shadow"/>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white text-center py-4">
+    <div class="container">
+      <p class="mb-1" data-i18n="footer-rights">&copy; 2025 PadelZonen. All rights reserved.</p>
+      <small data-i18n="footer-note">This site is developed as an educational project to provide a free e‑commerce store.</small>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Custom script to update cart -->
+  <script src="js/script.js"></script>
+  <!-- Language script for translations -->
+  <script src="js/lang.js"></script>
+</body>
+</html>
+
+
+/* --- padelzonen/contact.html --- */
+
+<!DOCTYPE html>
+<!-- Default language is English; will be overridden by lang.js -->
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title data-i18n="contact-title">Contact Us – PadelZonen</title>
+  <link id="bootstrap-css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+  <link href="css/style.css" rel="stylesheet"/>
+</head>
+<body onload="loadCartCount()">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="index.html">
+        <img src="assets/logo.png" alt="Logo" width="40" height="40" class="me-2"/>
+        <span class="fw-bold">PadelZonen</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="index.html"><span data-i18n="nav-home">Home</span></a></li>
+          <li class="nav-item"><a class="nav-link" href="product.html"><span data-i18n="nav-product">Product</span></a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html"><span data-i18n="nav-about">About</span></a></li>
+          <li class="nav-item"><a class="nav-link active" aria-current="page" href="contact.html"><span data-i18n="nav-contact">Contact</span></a></li>
+        </ul>
+        <!-- Language selector -->
+        <select id="language-select" class="form-select form-select-sm me-2" onchange="changeLang(this.value)">
+          <option value="en">English</option>
+          <option value="ar">العربية</option>
+          <option value="sv">Svenska</option>
+          <option value="de">Deutsch</option>
+          <option value="fr">Français</option>
+          <option value="es">Español</option>
+          <option value="it">Italiano</option>
+          <option value="nl">Nederlands</option>
+          <option value="pt">Português</option>
+          <option value="da">Dansk</option>
+          <option value="no">Norsk</option>
+          <option value="fi">Suomi</option>
+          <option value="pl">Polski</option>
+        </select>
+        <button type="button" class="btn btn-outline-light position-relative" onclick="openCart()" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas">
+          <i class="fa fa-shopping-cart"></i>
+          <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Offcanvas cart sidebar -->
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="cartOffcanvas" aria-labelledby="cartOffcanvasLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="cartOffcanvasLabel" data-i18n="cart-title">Cart</h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div id="cart-items"></div>
+      <hr/>
+      <p><strong data-i18n="cart-total-label">Total:</strong> <span id="cart-total">0</span> SEK</p>
+      <a href="product.html" class="btn btn-primary w-100" data-i18n="hero-cta">Shop Now</a>
+    </div>
+  </div>
+
+  <!-- Toast notification for added to cart -->
+  <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1080">
+    <div id="cartToast" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="d-flex">
+        <div class="toast-body" data-i18n="cart-added">Product added to cart!</div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+    </div>
+  </div>
+
+  <main class="container" style="margin-top: 90px;">
+    <h2 class="fw-bold mb-4 text-center" data-i18n="contact-heading">Contact Us</h2>
+    <p class="text-center" data-i18n="contact-intro">Have a question or want to order in bulk? We're happy to hear from you. Please fill out the form below and we'll get back to you as soon as possible.</p>
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <!-- Contact/order form using Formsubmit (replace email with your own before deploying) -->
+        <form action="https://formsubmit.co/YOUR_EMAIL@example.com" method="POST" class="needs-validation" novalidate>
+          <div class="mb-3">
+            <label for="name" class="form-label" data-i18n="contact-name">Full Name</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+            <div class="invalid-feedback" data-i18n="contact-name-msg">Please enter your name.</div>
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label" data-i18n="contact-email">Email Address</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+            <div class="invalid-feedback" data-i18n="contact-email-msg">Please enter a valid email.</div>
+          </div>
+          <div class="mb-3">
+            <label for="phone" class="form-label" data-i18n="contact-phone">Phone Number (optional)</label>
+            <input type="tel" class="form-control" id="phone" name="phone">
+          </div>
+          <div class="mb-3">
+            <label for="quantity" class="form-label" data-i18n="contact-quantity">Quantity</label>
+            <input type="number" class="form-control" id="quantity" name="quantity" min="1" value="1" required>
+            <div class="invalid-feedback" data-i18n="contact-quantity-msg">Please enter the quantity.</div>
+          </div>
+          <div class="mb-3">
+            <label for="postal" class="form-label" data-i18n="contact-postal">Postal Code</label>
+            <input type="text" class="form-control" id="postal" name="postal" required>
+            <div class="invalid-feedback" data-i18n="contact-postal-msg">Please enter the postal code.</div>
+          </div>
+          <div class="mb-3">
+            <label for="country" class="form-label" data-i18n="contact-country">Country</label>
+            <input type="text" class="form-control" id="country" name="country" required>
+            <div class="invalid-feedback" data-i18n="contact-country-msg">Please enter the country.</div>
+          </div>
+          <div class="mb-3">
+            <label for="address" class="form-label" data-i18n="contact-address">Address</label>
+            <textarea class="form-control" id="address" name="address" rows="3" required></textarea>
+            <div class="invalid-feedback" data-i18n="contact-address-msg">Please enter the full address.</div>
+          </div>
+          <!-- Hidden input to bypass CAPTCHA and redirect after submission -->
+          <input type="hidden" name="_subject" data-i18n-value="contact-subject" value="New order from PadelZonen"/>
+          <input type="hidden" name="_captcha" value="false"/>
+          <input type="hidden" name="_next" value="https://example.com/thanks.html"/>
+          <button type="submit" class="btn btn-primary" data-i18n="contact-submit">Send Order</button>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <footer class="bg-dark text-white text-center py-4 mt-5">
+    <div class="container">
+      <p class="mb-1" data-i18n="footer-rights">&copy; 2025 PadelZonen. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/script.js"></script>
+  <script src="js/lang.js"></script>
+  <!-- Form validation -->
+  <script>
+    (function () {
+      'use strict';
+      var forms = document.querySelectorAll('.needs-validation');
+      Array.prototype.slice.call(forms).forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          // If form is invalid, prevent default submission
+          if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+          } else {
+            // Gather order details for supplier integration
+            var order = {
+              name: form.name.value,
+              email: form.email.value,
+              phone: form.phone.value,
+              quantity: form.quantity.value,
+              address: form.address.value,
+              postal: form.postal.value,
+              country: form.country.value
+            };
+            if (typeof sendToSupplier === 'function') {
+              try {
+                sendToSupplier(order);
+              } catch (err) {
+                console.error('Supplier API error:', err);
+              }
+            }
+          }
+          form.classList.add('was-validated');
+        }, false);
+      });
+    })();
+  </script>
+</body>
+</html>
+
+
+/* --- padelzonen/about.html --- */
+
+<!DOCTYPE html>
+<!-- Default language is English; updated dynamically via lang.js -->
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title data-i18n="about-title">About – PadelZonen</title>
+  <link id="bootstrap-css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+  <link href="css/style.css" rel="stylesheet"/>
+</head>
+<body onload="loadCartCount()">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="index.html">
+        <img src="assets/logo.png" alt="Logo" width="40" height="40" class="me-2"/>
+        <span class="fw-bold">PadelZonen</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="index.html"><span data-i18n="nav-home">Home</span></a></li>
+          <li class="nav-item"><a class="nav-link" href="product.html"><span data-i18n="nav-product">Product</span></a></li>
+          <li class="nav-item"><a class="nav-link active" aria-current="page" href="about.html"><span data-i18n="nav-about">About</span></a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html"><span data-i18n="nav-contact">Contact</span></a></li>
+        </ul>
+        <!-- Language selector -->
+        <select id="language-select" class="form-select form-select-sm me-2" onchange="changeLang(this.value)">
+          <option value="en">English</option>
+          <option value="ar">العربية</option>
+          <option value="sv">Svenska</option>
+          <option value="de">Deutsch</option>
+          <option value="fr">Français</option>
+          <option value="es">Español</option>
+          <option value="it">Italiano</option>
+          <option value="nl">Nederlands</option>
+          <option value="pt">Português</option>
+          <option value="da">Dansk</option>
+          <option value="no">Norsk</option>
+          <option value="fi">Suomi</option>
+          <option value="pl">Polski</option>
+        </select>
+        <button type="button" class="btn btn-outline-light position-relative" onclick="openCart()" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas">
+          <i class="fa fa-shopping-cart"></i>
+          <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Offcanvas cart sidebar -->
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="cartOffcanvas" aria-labelledby="cartOffcanvasLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="cartOffcanvasLabel" data-i18n="cart-title">Cart</h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div id="cart-items"></div>
+      <hr/>
+      <p><strong data-i18n="cart-total-label">Total:</strong> <span id="cart-total">0</span> SEK</p>
+      <a href="product.html" class="btn btn-primary w-100" data-i18n="hero-cta">Shop Now</a>
+    </div>
+  </div>
+
+  <!-- Toast notification for added to cart -->
+  <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1080">
+    <div id="cartToast" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="d-flex">
+        <div class="toast-body" data-i18n="cart-added">Product added to cart!</div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+    </div>
+  </div>
+
+  <main class="container" style="margin-top: 90px;">
+    <h2 class="fw-bold mb-4 text-center" data-i18n="about-heading">Who We Are</h2>
+    <p data-i18n="about-p1">PadelZonen began from our passion for the sport of padel and our desire to provide high‑quality equipment at affordable prices for all players. We noticed the rapid growth of this sport in Sweden and Europe and saw a strong demand for carefully designed rackets that combine lightness, power and control. Therefore, we established an online store that relies on durable materials and secure purchase processes to meet this increasing demand.</p>
+    <p data-i18n="about-p2">We are committed to providing a distinguished user experience – from product selection to delivery and after‑sales support. We aim to build a community of padel enthusiasts of all ages and backgrounds by providing reliable gear that encourages everyone to enjoy this exciting sport.</p>
+
+    <h3 class="fw-bold mt-5" data-i18n="about-why-heading">Why Choose PadelZonen?</h3>
+    <ul class="list-unstyled">
+      <li class="mb-2"><i class="fa fa-check text-success ms-2"></i> <span data-i18n="about-li1">High‑quality products made from advanced materials.</span></li>
+      <li class="mb-2"><i class="fa fa-check text-success ms-2"></i> <span data-i18n="about-li2">Competitive prices and a profit margin that allows us to continue without compromising quality.</span></li>
+      <li class="mb-2"><i class="fa fa-check text-success ms-2"></i> <span data-i18n="about-li3">A support team ready to answer your questions and offer advice.</span></li>
+      <li class="mb-2"><i class="fa fa-check text-success ms-2"></i> <span data-i18n="about-li4">Full commitment to customer privacy and payment security.</span></li>
+    </ul>
+
+    <h3 class="fw-bold mt-5" data-i18n="about-look-heading">A Look at Padel Sport</h3>
+    <p data-i18n="about-padel-desc">Padel is a sport that combines elements of tennis and squash, played on a court surrounded by walls that are used during play. It uses solid rackets without strings, and the game is usually played in doubles, enhancing teamwork and making padel both a social activity and a competitive sport. With over half a million players in Sweden alone, padel is a great choice for exercise and leisure.</p>
+
+  </main>
+
+  <footer class="bg-dark text-white text-center py-4 mt-5">
+    <div class="container">
+      <p class="mb-1" data-i18n="footer-rights">&copy; 2025 PadelZonen. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/script.js"></script>
+  <script src="js/lang.js"></script>
+</body>
+</html>
+
+
+/* --- padelzonen/js/lang.js --- */
+
+// Language translation utility for PadelZonen
+// This script defines translation dictionaries for Arabic (ar),
+// English (en) and Swedish (sv) and exposes functions to change
+// language at runtime. It also handles page direction (rtl/ltr)
+// and dynamic switching of Bootstrap CSS between RTL and LTR versions.
+
+(() => {
+  // Translation strings keyed by language then message key. Each
+  // entry corresponds to a piece of text in the HTML with a
+  // matching data-i18n attribute. Strings may contain HTML (e.g. <a>)
+  // so we always assign via innerHTML.
+  const translations = {
+    en: {
+      // Navigation
+      'nav-home': 'Home',
+      'nav-product': 'Product',
+      'nav-about': 'About',
+      'nav-contact': 'Contact',
+      // Hero section
+      'hero-heading': 'Get ready for the game!',
+      'hero-subheading': 'High‑quality padel rackets made from carbon fiber ensuring professional performance for players of all ages.',
+      'hero-cta': 'Shop Now',
+      // Features
+      'feature-quality-title': 'Premium Quality',
+      'feature-quality-desc': 'We use the latest carbon materials and EVA foam to ensure the best balance between power and precision.',
+      'feature-age-title': 'For All Ages',
+      'feature-age-desc': 'Ergonomic design suitable for both young and adult players, with ideal weight for beginners and professionals.',
+      'feature-delivery-title': 'Fast Delivery',
+      'feature-delivery-desc': 'We offer free delivery within Sweden with safe and easy payment options.',
+      // About preview on home
+      'preview-heading': 'Why Padel?',
+      'preview-desc': 'Padel is one of the fastest growing sports worldwide, and its popularity is rapidly increasing in Sweden. With over half a million players and 800 courts in the country, padel has become a favourite sport for many families and friends. At PadelZonen we strive to provide the best equipment so everyone can have a fun and safe playing experience.',
+      'preview-btn': 'Read More',
+      // Footer
+      'footer-rights': '&copy; 2025 PadelZonen. All rights reserved.',
+      'footer-note': 'This site is developed as an educational project to provide a free e‑commerce store.',
+      // About page
+      'about-title': 'About – PadelZonen',
+      'about-heading': 'Who We Are',
+      'about-p1': 'PadelZonen began from our passion for the sport of padel and our desire to provide high‑quality equipment at affordable prices for all players. We noticed the rapid growth of this sport in Sweden and Europe and saw a strong demand for carefully designed rackets that combine lightness, power and control. Therefore, we established an online store that relies on durable materials and secure purchase processes to meet this increasing demand.',
+      'about-p2': 'We are committed to providing a distinguished user experience – from product selection to delivery and after‑sales support. We aim to build a community of padel enthusiasts of all ages and backgrounds by providing reliable gear that encourages everyone to enjoy this exciting sport.',
+      'about-why-heading': 'Why Choose PadelZonen?',
+      'about-li1': 'High‑quality products made from advanced materials.',
+      'about-li2': 'Competitive prices and a profit margin that allows us to continue without compromising quality.',
+      'about-li3': 'A support team ready to answer your questions and offer advice.',
+      'about-li4': 'Full commitment to customer privacy and payment security.',
+      'about-look-heading': 'A Look at Padel Sport',
+      'about-padel-desc': 'Padel is a sport that combines elements of tennis and squash, played on a court surrounded by walls that are used during play. It uses solid rackets without strings, and the game is usually played in doubles, enhancing teamwork and making padel both a social activity and a competitive sport. With over half a million players in Sweden alone, padel is a great choice for exercise and leisure.',
+      // Product page
+      'product-title': 'Padel Racket – PadelZonen',
+      'product-heading': 'Carbon Fiber Padel Racket',
+      'product-desc': 'This racket is designed to give you the best performance on the court, crafted from high‑quality carbon fiber and an EVA foam core to ensure excellent control and shock absorption. The balanced weight and round shape make it suitable for both beginners and professionals.',
+      'product-spec1': 'Approximate weight of 370 g',
+      'product-spec2': '12K carbon surface balancing power and control',
+      'product-spec3': 'Comfortable, anti‑slip handle',
+      'product-spec4': 'Suitable for all ages and skill levels',
+      'product-price': 'Price: 799.99 SEK',
+      'product-button': 'Add to Cart',
+      'product-additional-heading': 'Additional Details',
+      'product-additional-1': 'The racket features a triple composition – a body made from carbon and fiberglass with an EVA core, ensuring long‑lasting use and shock resistance. The round head shape provides a large sweet spot, while the handle wrapped with an anti‑slip grip offers comfortable hold during intense play.',
+      'product-additional-2': 'You can order large quantities for additional discounts. Please contact us via the <a href="contact.html" data-i18n="nav-contact">Contact</a> page for more information.',
+      // Contact page
+      'contact-title': 'Contact Us – PadelZonen',
+      'contact-heading': 'Contact Us',
+      'contact-intro': 'Have a question or want to order in bulk? We\'re happy to hear from you. Please fill out the form below and we\'ll get back to you as soon as possible.',
+      'contact-name': 'Full Name',
+      'contact-name-msg': 'Please enter your name.',
+      'contact-email': 'Email Address',
+      'contact-email-msg': 'Please enter a valid email.',
+      'contact-phone': 'Phone Number (optional)',
+      'contact-quantity': 'Quantity',
+      'contact-quantity-msg': 'Please enter the quantity.',
+      'contact-address': 'Address',
+      'contact-address-msg': 'Please enter the full address.',
+      'contact-submit': 'Send Order',
+      'contact-subject': 'New order from PadelZonen',
+      'contact-postal': 'Postal Code',
+      'contact-postal-msg': 'Please enter the postal code.',
+      'contact-country': 'Country',
+      'contact-country-msg': 'Please enter the country.',
+      // Payment button
+      'payment-button': 'Open Swish App',
+      // Cart
+      'cart-added': 'Product added to cart!',
+      // Payment via Swish
+      'payment-heading': 'Pay with Swish',
+      'payment-instructions': 'Pay via Swish: open your Swish app and send 799.99\u00a0SEK to the number: 1234567890. Please mention your order number in the message. After payment, contact us via the <a href="contact.html" data-i18n="nav-contact">Contact</a> page with proof of payment.',
+      // Cart (offcanvas and toast)
+      'cart-title': 'Cart',
+      'cart-empty': 'Your cart is empty.',
+      'cart-total-label': 'Total:'
+    },
+    ar: {
+      // Navigation
+      'nav-home': 'الرئيسية',
+      'nav-product': 'المنتج',
+      'nav-about': 'حول',
+      'nav-contact': 'تواصل',
+      // Hero section
+      'hero-heading': 'استعد للعبة!‎',
+      'hero-subheading': 'مضارب بادل عالية الجودة مصنوعة من ألياف الكربون تضمن أداءً احترافياً لكل اللاعبين من كافة الأعمار.',
+      'hero-cta': 'تسوق الآن',
+      // Features
+      'feature-quality-title': 'جودة فائقة',
+      'feature-quality-desc': 'نستخدم أحدث مواد الكربون وإسفنج EVA لضمان أفضل توازن بين القوة والدقة.',
+      'feature-age-title': 'لكل الأعمار',
+      'feature-age-desc': 'تصميم مريح يناسب اللاعبين الكبار والصغار على حد سواء، مع وزن مثالي للمبتدئين والمحترفين.',
+      'feature-delivery-title': 'توصيل سريع',
+      'feature-delivery-desc': 'نقدم خدمة توصيل مجانية داخل السويد مع خيارات دفع آمنة وسهلة.',
+      // About preview on home
+      'preview-heading': 'لماذا البادل؟',
+      'preview-desc': 'رياضة البادل تعتبر من أسرع الرياضات نمواً في العالم وتزداد شعبيتها بسرعة في السويد. مع وجود أكثر من نصف مليون لاعب و800 ملعب في البلاد، أصبحت البادل الرياضة المفضلة لكثير من العائلات والأصدقاء. نحن في PadelZonen نسعى لتوفير أفضل المعدات ليحصل الجميع على تجربة لعب ممتعة وآمنة.',
+      'preview-btn': 'اقرأ المزيد',
+      // Footer
+      'footer-rights': '&copy; 2025 PadelZonen. جميع الحقوق محفوظة.',
+      'footer-note': 'تم تطوير هذا الموقع كجزء من مشروع تعليمى لتوفير متجر إلكترونى مجاني.',
+      // About page
+      'about-title': 'حول – PadelZonen',
+      'about-heading': 'من نحن',
+      'about-p1': 'بدأت فكرة PadelZonen من شغفنا برياضة البادل ورغبتنا في توفير معدات عالية الجودة بأسعار معقولة لجميع اللاعبين. لاحظنا النمو المتسارع لهذه الرياضة فى السويد وأوروبا، ورأينا حاجة ملحة لتوفير مضارب مصممة بعناية تجمع بين الخفة والقوة والتحكم. لذلك أسسنا متجراً إلكترونياً يعتمد على مواد متينة وعمليات شراء آمنة لتلبية هذا الطلب المتزايد.',
+      'about-p2': 'نلتزم بتقديم تجربة مستخدم مميزة؛ بدءًا من عملية اختيار المنتج وحتى التوصيل والدعم بعد البيع. نهدف إلى بناء مجتمع من عشاق البادل من مختلف الأعمار والخلفيات، من خلال توفير معدات موثوقة تشجع الجميع على ممارسة هذه الرياضة الممتعة.',
+      'about-why-heading': 'لماذا تختار PadelZonen؟',
+      'about-li1': 'منتجات عالية الجودة مصنعة من مواد متطورة.',
+      'about-li2': 'أسعار تنافسية وهامش ربح يتيح لنا الاستمرارية دون المساس بالجودة.',
+      'about-li3': 'فريق دعم جاهز للإجابة على استفساراتكم وتقديم المشورة.',
+      'about-li4': 'التزام كامل بخصوصية العملاء وأمان الدفع.',
+      'about-look-heading': 'نظرة على رياضة البادل',
+      'about-padel-desc': 'البادل رياضة تجمع بين عناصر من التنس والاسكواش، تُمارَس في ملعب محاط بجدران تُستخدم أثناء اللعب. تستخدم مضارب صلبة بدون أوتار، ويُعد اللعب عادةً ثنائياً، مما يعزز روح التعاون ويُسهِم فى جعل البادل نشاطاً اجتماعياً إلى جانب كونه رياضة تنافسية. مع وجود أكثر من نصف مليون لاعب فى السويد وحدها، تُعد رياضة البادل خياراً رائعاً لممارسة الرياضة والاستمتاع بوقت الفراغ.',
+      // Product page
+      'product-title': 'مضرب البادل – PadelZonen',
+      'product-heading': 'مضرب البادل من ألياف الكربون',
+      'product-desc': 'تم تصميم هذا المضرب ليوفر لك أفضل أداء في الملعب، فهو مصنوع من ألياف الكربون عالية الجودة ونواة من إسفنج EVA لضمان قوة تحكم ممتازة وامتصاص الصدمات. الوزن المتوازن والشكل المستدير يجعلانه مناسباً للمبتدئين والمحترفين على حد سواء.',
+      'product-spec1': 'وزن تقريبي 370 جرام',
+      'product-spec2': 'سطح من الكربون 12K للتوازن بين القوة والسيطرة',
+      'product-spec3': 'مقبض مريح ومضاد للانزلاق',
+      'product-spec4': 'مناسب لكافة الأعمار والمستويات',
+      'product-price': 'السعر: 799,99 كرونة سويدية',
+      'product-button': 'أضف إلى السلة',
+      'product-additional-heading': 'تفاصيل إضافية',
+      'product-additional-1': 'يتميز المضرب بثلاثي التركيبة؛ هيكل من الكربون وألياف زجاجية ونواة EVA، مما يضمن طول عمر الاستخدام وتحمل الصدمات. شكل الرأس الدائري يمنح مساحة ضرب واسعة، بينما يضمن المقبض المغلف بشريط مضاد للانزلاق قبضة مريحة أثناء اللعب المكثف.',
+      'product-additional-2': 'يمكنك طلب كميات كبيرة للحصول على خصومات إضافية. يرجى التواصل معنا عبر صفحة <a href="contact.html" data-i18n="nav-contact">التواصل</a> للمزيد من المعلومات.',
+      // Contact page
+      'contact-title': 'تواصل معنا – PadelZonen',
+      'contact-heading': 'تواصل معنا',
+      'contact-intro': 'هل لديك سؤال أو ترغب في طلب كميات كبيرة؟ يسعدنا التواصل معك. يرجى ملء النموذج أدناه وسنعاود الرد عليك في أسرع وقت.',
+      'contact-name': 'الاسم الكامل',
+      'contact-name-msg': 'الرجاء إدخال الاسم.',
+      'contact-email': 'البريد الإلكتروني',
+      'contact-email-msg': 'الرجاء إدخال بريد إلكتروني صحيح.',
+      'contact-phone': 'رقم الهاتف (اختياري)',
+      'contact-quantity': 'الكمية المطلوبة',
+      'contact-quantity-msg': 'الرجاء تحديد الكمية.',
+      'contact-address': 'العنوان الكامل',
+      'contact-address-msg': 'الرجاء كتابة العنوان الكامل.',
+      'contact-submit': 'إرسال الطلب',
+      'contact-subject': 'طلب جديد من PadelZonen',
+      'contact-postal': 'الرمز البريدي',
+      'contact-postal-msg': 'الرجاء إدخال الرمز البريدي.',
+      'contact-country': 'البلد',
+      'contact-country-msg': 'الرجاء تحديد البلد.',
+      // Payment button
+      'payment-button': 'افتح تطبيق Swish',
+      // Cart
+      'cart-added': 'تم إضافة المنتج إلى السلة!',
+      // Payment via Swish
+      'payment-heading': 'الدفع عبر Swish',
+      'payment-instructions': 'طريقة الدفع عبر Swish: افتح تطبيق Swish وأرسل 799,99\u00a0كرونة إلى الرقم 1234567890. يرجى ذكر رقم الطلب في الرسالة. بعد الدفع، يرجى التواصل معنا عبر صفحة <a href="contact.html" data-i18n="nav-contact">التواصل</a> مع إثبات الدفع.',
+      // Cart (offcanvas and toast)
+      'cart-title': 'سلة التسوق',
+      'cart-empty': 'سلة التسوق فارغة.',
+      'cart-total-label': 'الإجمالي:'
+    },
+    sv: {
+      // Navigation
+      'nav-home': 'Hem',
+      'nav-product': 'Produkt',
+      'nav-about': 'Om',
+      'nav-contact': 'Kontakt',
+      // Hero section
+      'hero-heading': 'Förbered dig för spelet!',
+      'hero-subheading': 'Högkvalitativa padelracketar tillverkade av kolfiber som garanterar professionell prestanda för spelare i alla åldrar.',
+      'hero-cta': 'Handla nu',
+      // Features
+      'feature-quality-title': 'Hög kvalitet',
+      'feature-quality-desc': 'Vi använder de senaste kolfibermaterialen och EVA-skum för att säkerställa den bästa balansen mellan kraft och precision.',
+      'feature-age-title': 'För alla åldrar',
+      'feature-age-desc': 'Ergonomisk design som passar både unga och vuxna spelare, med idealisk vikt för nybörjare och proffs.',
+      'feature-delivery-title': 'Snabb leverans',
+      'feature-delivery-desc': 'Vi erbjuder gratis leverans inom Sverige med säkra och enkla betalningsalternativ.',
+      // About preview on home
+      'preview-heading': 'Varför padel?',
+      'preview-desc': 'Padel är en av världens snabbast växande sporter och dess popularitet ökar snabbt i Sverige. Med över en halv miljon spelare och 800 banor i landet har padel blivit en favoritsport för många familjer och vänner. På PadelZonen strävar vi efter att erbjuda den bästa utrustningen så att alla kan få en rolig och säker spelupplevelse.',
+      'preview-btn': 'Läs mer',
+      // Footer
+      'footer-rights': '&copy; 2025 PadelZonen. Alla rättigheter förbehållna.',
+      'footer-note': 'Denna webbplats har utvecklats som ett utbildningsprojekt för att tillhandahålla en gratis e‑handelsbutik.',
+      // About page
+      'about-title': 'Om – PadelZonen',
+      'about-heading': 'Vilka vi är',
+      'about-p1': 'PadelZonen började från vår passion för padelsporten och vårt mål att tillhandahålla utrustning av hög kvalitet till överkomliga priser för alla spelare. Vi har sett den snabba tillväxten av denna sport i Sverige och Europa och såg ett starkt behov av noggrant designade racketar som kombinerar lätthet, kraft och kontroll. Därför grundade vi en webbutik som använder hållbara material och säkra inköpsprocesser för att tillgodose denna ökande efterfrågan.',
+      'about-p2': 'Vi är engagerade i att erbjuda en utmärkt användarupplevelse – från produktval till leverans och support efter köpet. Vårt mål är att bygga ett samhälle av padelentusiaster i alla åldrar och bakgrunder genom att tillhandahålla pålitlig utrustning som uppmuntrar alla att njuta av denna spännande sport.',
+      'about-why-heading': 'Varför välja PadelZonen?',
+      'about-li1': 'Högkvalitativa produkter tillverkade av avancerade material.',
+      'about-li2': 'Konkurrenskraftiga priser och vinstmarginal som låter oss fortsätta utan att kompromissa med kvaliteten.',
+      'about-li3': 'Ett supportteam redo att svara på dina frågor och ge råd.',
+      'about-li4': 'Fullt engagemang för kundernas integritet och betalningssäkerhet.',
+      'about-look-heading': 'En titt på padelsport',
+      'about-padel-desc': 'Padel är en sport som kombinerar element från tennis och squash, spelad på en bana omgiven av väggar som används under spelet. Den använder solida racketar utan strängar, och spelet spelas vanligtvis i par, vilket förbättrar samarbete och gör padel både en social aktivitet och en tävlingsinriktad sport. Med över en halv miljon spelare bara i Sverige är padel ett utmärkt val för träning och fritid.',
+      // Product page
+      'product-title': 'Padelracket – PadelZonen',
+      'product-heading': 'Padelracket av kolfiber',
+      'product-desc': 'Detta racket är designat för att ge dig bästa prestanda på banan. Det är tillverkat av högkvalitativ kolfiber och en kärna av EVA-skum för att säkerställa utmärkt kontroll och stötdämpning. Den balanserade vikten och den runda formen gör det lämpligt för både nybörjare och proffs.',
+      'product-spec1': 'Ungefärlig vikt: 370 g',
+      'product-spec2': '12K kolfiberyta som balanserar kraft och kontroll',
+      'product-spec3': 'Bekvämt, halkfritt grepp',
+      'product-spec4': 'Passar alla åldrar och färdighetsnivåer',
+      'product-price': 'Pris: 799,99 SEK',
+      'product-button': 'Lägg till i kundvagn',
+      'product-additional-heading': 'Ytterligare detaljer',
+      'product-additional-1': 'Racketen har en tredubbel sammansättning – en kropp av kolfiber och glasfiber med en EVA-kärna – vilket säkerställer långvarig användning och stötreducering. Den runda huvudformen ger ett stort träffområde, medan handtaget med halkfritt grepp erbjuder komfort under intensivt spel.',
+      'product-additional-2': 'Du kan beställa större kvantiteter för extra rabatter. Vänligen kontakta oss via <a href="contact.html" data-i18n="nav-contact">Kontakt</a>-sidan för mer information.',
+      // Contact page
+      'contact-title': 'Kontakta oss – PadelZonen',
+      'contact-heading': 'Kontakta oss',
+      'contact-intro': 'Har du en fråga eller vill du beställa större mängder? Vi hör gärna från dig. Fyll i formuläret nedan så återkommer vi till dig så snart som möjligt.',
+      'contact-name': 'Fullständigt namn',
+      'contact-name-msg': 'Vänligen ange ditt namn.',
+      'contact-email': 'E‑postadress',
+      'contact-email-msg': 'Vänligen ange en giltig e‑postadress.',
+      'contact-phone': 'Telefonnummer (valfritt)',
+      'contact-quantity': 'Antal',
+      'contact-quantity-msg': 'Vänligen ange kvantiteten.',
+      'contact-address': 'Adress',
+      'contact-address-msg': 'Vänligen ange hela adressen.',
+      'contact-submit': 'Skicka beställning',
+      'contact-subject': 'Ny beställning från PadelZonen',
+      'contact-postal': 'Postnummer',
+      'contact-postal-msg': 'Vänligen ange postnumret.',
+      'contact-country': 'Land',
+      'contact-country-msg': 'Vänligen ange landet.',
+      // Payment button
+      'payment-button': 'Öppna Swish-appen',
+      // Cart
+      'cart-added': 'Produkten har lagts till i kundvagnen!',
+      // Payment via Swish
+      'payment-heading': 'Betala med Swish',
+      'payment-instructions': 'Betala med Swish: öppna din Swish-app och skicka 799,99\u00a0SEK till numret 1234567890. Ange ditt ordernummer i meddelandet. Efter betalning, kontakta oss via <a href="contact.html" data-i18n="nav-contact">Kontakt</a>-sidan med betalningsbevis.',
+      // Cart (offcanvas and toast)
+      'cart-title': 'Kundvagn',
+      'cart-empty': 'Din kundvagn är tom.',
+      'cart-total-label': 'Totalt:'
+    },
+    /**
+     * The following language objects reuse the English translations by default.
+     * They provide basic localisation for additional European languages.
+     * If you wish to offer full translations, replace the values with
+     * appropriate text for each key.
+     */
+    de: {},
+    fr: {},
+    es: {},
+    it: {},
+    nl: {},
+    pt: {},
+    da: {},
+    no: {},
+    fi: {},
+    pl: {}
+  };
+
+  // Extend the default translations for new languages by copying the English set.
+  [ 'de', 'fr', 'es', 'it', 'nl', 'pt', 'da', 'no', 'fi', 'pl' ].forEach(function (lang) {
+    translations[lang] = Object.assign({}, translations['en']);
+  });
+
+  /**
+   * Retrieve the user\'s preferred language from localStorage.
+   * Defaults to English if not set.
+   * @returns {string} The language code.
+   */
+  function getCurrentLang() {
+    return localStorage.getItem('preferredLang') || 'en';
+  }
+
+  // Expose getCurrentLang on window so other scripts can access it
+  window.getCurrentLang = getCurrentLang;
+
+  /**
+   * Set the page language. This updates all elements with a
+   * data-i18n attribute, swaps Bootstrap RTL/LTR CSS, and stores
+   * the preference in localStorage.
+   * @param {string} lang The language code to set.
+   */
+  function setLanguage(lang) {
+    if (!translations[lang]) lang = 'en';
+    // update all elements
+    document.querySelectorAll('[data-i18n]').forEach((el) => {
+      const key = el.getAttribute('data-i18n');
+      const text = translations[lang][key];
+      if (text !== undefined) {
+        el.innerHTML = text;
+      }
+    });
+    // Update value attributes on elements that have data-i18n-value
+    document.querySelectorAll('[data-i18n-value]').forEach((el) => {
+      const key = el.getAttribute('data-i18n-value');
+      const text = translations[lang][key];
+      if (text !== undefined) {
+        el.value = text;
+      }
+    });
+    // update html attributes for direction and language
+    document.documentElement.lang = lang;
+    if (lang === 'ar') {
+      document.documentElement.dir = 'rtl';
+      // swap bootstrap to RTL version
+      const css = document.getElementById('bootstrap-css');
+      if (css) {
+        css.href = 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css';
+      }
+    } else {
+      document.documentElement.dir = 'ltr';
+      const css = document.getElementById('bootstrap-css');
+      if (css) {
+        css.href = 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css';
+      }
+    }
+    // update select
+    const selector = document.getElementById('language-select');
+    if (selector) selector.value = lang;
+    // store preference
+    localStorage.setItem('preferredLang', lang);
+    // update document title if translation provided
+    const titleKey = {
+      'index.html': 'nav-home',
+      'about.html': 'about-title',
+      'product.html': 'product-title',
+      'contact.html': 'contact-title'
+    };
+    const page = location.pathname.split('/').pop();
+    const pageKey = titleKey[page];
+    if (pageKey && translations[lang][pageKey]) {
+      document.title = translations[lang][pageKey];
+    }
+
+    // Update cart display if the function exists to refresh totals and labels in the selected language
+    if (typeof updateCartDisplay === 'function') {
+      updateCartDisplay();
+    }
+  }
+
+  /**
+   * Handler for the language dropdown. Simply calls setLanguage.
+   * @param {string} lang The selected language.
+   */
+  window.changeLang = function (lang) {
+    setLanguage(lang);
+  };
+
+  /**
+   * Exported function to get a translation string in the current language.
+   * Useful in other scripts like cart handling.
+   * @param {string} key The translation key.
+   * @returns {string} The translated string.
+   */
+  window.getTranslation = function (key) {
+    const lang = getCurrentLang();
+    return translations[lang] && translations[lang][key] ? translations[lang][key] : translations['en'][key] || '';
+  };
+
+  // On DOM ready, set initial language
+  document.addEventListener('DOMContentLoaded', () => {
+    const lang = getCurrentLang();
+    setLanguage(lang);
+  });
+})();
+
+
+/* --- padelzonen/js/script.js --- */
+
+// cart management using localStorage
+/**
+ * Update the cart count badge and offcanvas display. If the offcanvas
+ * is present on the page, this function will also populate the list
+ * of items and the total price. Cart count is stored in localStorage
+ * under the key `cartCount`.
+ */
+function loadCartCount() {
+  updateCartDisplay();
+}
+
+function addToCart() {
+  try {
+    var count = parseInt(localStorage.getItem('cartCount')) || 0;
+    count += 1;
+    localStorage.setItem('cartCount', count);
+    updateCartDisplay();
+    // Show toast notification instead of alert
+    var toastEl = document.getElementById('cartToast');
+    if (toastEl) {
+      var msgEl = toastEl.querySelector('.toast-body');
+      if (msgEl && typeof getTranslation === 'function') {
+        msgEl.innerHTML = getTranslation('cart-added');
+      }
+      var toast = bootstrap.Toast.getOrCreateInstance(toastEl);
+      toast.show();
+    }
+  } catch (e) {
+    console.error('Cart update error:', e);
+  }
+}
+
+/**
+ * Update cart badge and offcanvas contents. Reads cartCount from
+ * localStorage, calculates total based on fixed price, and inserts
+ * translated text into the offcanvas.
+ */
+function updateCartDisplay() {
+  try {
+    var count = parseInt(localStorage.getItem('cartCount')) || 0;
+    // Update badge
+    var badge = document.getElementById('cart-count');
+    if (badge) {
+      badge.textContent = count;
+    }
+    // Update offcanvas items and total if available
+    var itemsDiv = document.getElementById('cart-items');
+    var totalSpan = document.getElementById('cart-total');
+    var titleEl = document.getElementById('cartOffcanvasLabel');
+    if (titleEl && typeof getTranslation === 'function') {
+      titleEl.innerHTML = getTranslation('cart-title');
+    }
+    if (itemsDiv) {
+      if (count === 0) {
+        if (typeof getTranslation === 'function') {
+          itemsDiv.innerHTML = '<p>' + getTranslation('cart-empty') + '</p>';
+        } else {
+          itemsDiv.innerHTML = '<p>Your cart is empty.</p>';
+        }
+      } else {
+        // Build item line
+        var line = '<p>Padel Racket × ' + count + '</p>';
+        itemsDiv.innerHTML = line;
+      }
+    }
+    if (totalSpan) {
+      var price = 799.99;
+      var total = count * price;
+      // Format number with two decimals and comma/point according to language
+      var lang = (typeof getCurrentLang === 'function') ? getCurrentLang() : 'en';
+      var formatted;
+      if (lang === 'sv') {
+        // Use Swedish locale formatting for decimal comma
+        try {
+          formatted = total.toLocaleString('sv-SE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        } catch (e) {
+          formatted = total.toFixed(2).replace('.', ',');
+        }
+      } else if (lang === 'ar') {
+        // Arabic also uses comma as decimal separator
+        formatted = total.toFixed(2).replace('.', ',');
+      } else {
+        formatted = total.toFixed(2);
+      }
+      totalSpan.textContent = formatted;
+    }
+  } catch (e) {
+    console.error('updateCartDisplay error:', e);
+  }
+}
+
+/**
+ * Open the cart offcanvas programmatically. This helper updates
+ * the cart display then shows the offcanvas using Bootstrap's JS API.
+ */
+function openCart() {
+  try {
+    updateCartDisplay();
+    var offcanvasEl = document.getElementById('cartOffcanvas');
+    if (offcanvasEl) {
+      var offcanvas = bootstrap.Offcanvas.getOrCreateInstance(offcanvasEl);
+      offcanvas.show();
+    }
+  } catch (e) {
+    console.error('openCart error:', e);
+  }
+}
+
+/**
+ * Placeholder function to send order details to your supplier.
+ * Replace the fetch URL and payload structure with your supplier's API.
+ * @param {Object} order Details collected from the contact form.
+ */
+function sendToSupplier(order) {
+  // Example: send order data to an external API. Replace URL and fields.
+  // This will run asynchronously and does not block form submission.
+  try {
+    // Uncomment and edit the fetch call below once you have your supplier API endpoint.
+    /*
+    fetch('https://supplier.example.com/api/create-order', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(order)
+    }).then(function (response) {
+      return response.json();
+    }).then(function (data) {
+      console.log('Supplier order placed:', data);
+    }).catch(function (error) {
+      console.error('Error sending order to supplier:', error);
+    });
+    */
+    console.log('Sending order to supplier:', order);
+  } catch (e) {
+    console.error('sendToSupplier error:', e);
+  }
+}
+
+/**
+ * Open the Swish application using a deep link.
+ * Replace the phone and amount values with your actual Swish number and price.
+ */
+function openSwish() {
+  try {
+    // Use the swish URI scheme. Adjust parameters as needed.
+    var phone = '1234567890';
+    var amount = '799.99';
+    // Construct URI; note: the actual Swish URI scheme may differ.
+    var uri = 'swish://payment?phone=' + encodeURIComponent(phone) + '&amount=' + encodeURIComponent(amount);
+    window.location.href = uri;
+  } catch (e) {
+    console.error('openSwish error:', e);
+  }
+}
+
+
+/* --- padelzonen/css/style.css --- */
+
+/* Custom styles for PadelZonen */
+body {
+  font-family: 'Tajawal', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f9f9f9;
+  line-height: 1.6;
+}
+
+/* Brand accent colour for logo text */
+.navbar-brand span {
+  color: #f5a623;
+}
+
+/* Override primary button to use brand colour */
+.btn-primary {
+  background-color: #f5a623;
+  border-color: #f5a623;
+  color: #000;
+}
+.btn-primary:hover {
+  background-color: #d4891c;
+  border-color: #d4891c;
+  color: #000;
+}
+
+/* Price styling – make price green */
+h3[data-i18n="product-price"] {
+  color: #198754;
+}
+
+/* Language selector sizing – auto width */
+.navbar #language-select {
+  width: auto;
+  min-width: 80px;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+/* Hero section */
+.hero {
+  background: url('../assets/hero.png') center/cover no-repeat;
+  min-height: 70vh;
+  /* Offset for fixed navbar height */
+  padding-top: 80px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.55);
+}
+.hero .container {
+  position: relative;
+  z-index: 2;
+}
+.hero h1 {
+  font-size: 3rem;
+  color: #fff;
+}
+.hero p {
+  color: #e0e0e0;
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: #004a99;
+  border-color: #004a99;
+}
+.btn-primary:hover {
+  background-color: #003d80;
+  border-color: #003d80;
+}
+
+/* Features icons */
+.fa-3x {
+  /* Use brand colour for icons */
+  color: #f5a623;
+}
+
+/* Section headings */
+h2, h3, h4 {
+  color: #004a99;
+}
+
+/* Footer */
+footer {
+  font-size: 0.9rem;
+}
+
+/* Language selector sizing in navbar */
+.navbar #language-select {
+  width: auto;
+  min-width: 90px;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
